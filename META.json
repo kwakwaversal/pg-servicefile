@@ -1,5 +1,5 @@
 {
-   "abstract" : "Blah blah blah",
+   "abstract" : "Basic PostgreSQL connection service file interface",
    "author" : [
       "Paul Williams <kwakwa@cpan.org>"
    ],
@@ -37,17 +37,36 @@
       },
       "runtime" : {
          "requires" : {
+            "Config::INI::Reader" : "0",
+            "Moo" : "0",
+            "Types::Path::Tiny" : "0",
+            "Types::Standard" : "0",
             "perl" : "5.008005"
          }
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.96"
+            "Data::Section" : "0",
+            "Test2::Suite" : "0"
          }
       }
    },
    "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/kwakwaversal/pg-servicefile/issues"
+      },
+      "homepage" : "https://github.com/kwakwaversal/pg-servicefile",
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/kwakwaversal/pg-servicefile.git",
+         "web" : "https://github.com/kwakwaversal/pg-servicefile"
+      }
+   },
    "version" : "0.01",
+   "x_contributors" : [
+      "Paul Williams <kwakwaversal@gmail.com>"
+   ],
    "x_serialization_backend" : "Cpanel::JSON::XS version 4.01"
 }
 
