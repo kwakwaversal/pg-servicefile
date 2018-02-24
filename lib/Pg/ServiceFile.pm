@@ -143,14 +143,17 @@ Returns the names of all the connection services from the service L</"file">.
 
 =head2 service
 
+    my $pgservice = Pg::ServiceFile->new(name => 'foo');
+    say $pgservice->service->{dbname}; # db_foo
+
 If L</"name"> has been set via C<< $ENV{PGSERVICE} >> or on instantiation, returns
-the corresponding connection service.
+the corresponding connection service. See L</"name">.
 
 =head2 services
 
     my $pgservice = Pg::ServiceFile->new();
-    for my $service ($pgservice->services) {
-        say "$service->{dbname} at $service->{host}";
+    while (my ($name, $service) = each %{$pgservice->services}) {
+        say "[$name] $service->{dbname} at $service->{host}";
     }
 
 Returns a C<HASH> of all of the connection services from L</"file">.
