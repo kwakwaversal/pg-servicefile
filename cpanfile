@@ -1,6 +1,6 @@
 requires 'perl', '5.008005';
 
-requires 'Config::INI::Reader';
+requires 'Config::Pg::ServiceFile';
 requires 'Moo';
 requires 'Types::Path::Tiny';
 requires 'Types::Standard';

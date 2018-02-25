@@ -37,7 +37,7 @@
       },
       "runtime" : {
          "requires" : {
-            "Config::INI::Reader" : "0",
+            "Config::Pg::ServiceFile" : "0",
             "Moo" : "0",
             "Types::Path::Tiny" : "0",
             "Types::Standard" : "0",

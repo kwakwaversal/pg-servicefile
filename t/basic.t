@@ -78,6 +78,8 @@ __DATA__
 
 __[ pg_service ]__
 
+# comments are fine
+# but need to be at the beginning of the line
 [foo]
 host=localhost
 port=5432
