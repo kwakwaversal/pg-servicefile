@@ -25,6 +25,10 @@ connection service file. It's complete in the fact that it reads the `$ENV{PGSER
 automatically retrieve and merge the system-wide service file or check
 `PGSYSCONFDIR`.
 
+If you know the connection service file you want to use, and just want the data
+as a `HASH` reference, you can use the simpler module [Config::Pg::ServiceFile](https://metacpan.org/pod/Config::Pg::ServiceFile)
+which has less dependencies and features.
+
 # ATTRIBUTES
 
 [Pg::ServiceFile](https://metacpan.org/pod/Pg::ServiceFile) implements the following attributes.
@@ -79,17 +83,24 @@ Returns the names of all the connection services from the service ["file"](#file
 
 ## service
 
+    my $pgservice = Pg::ServiceFile->new(name => 'foo');
+    say $pgservice->service->{dbname}; # db_foo
+
 If ["name"](#name) has been set via `$ENV{PGSERVICE}` or on instantiation, returns
-the corresponding connection service.
+the corresponding connection service. See ["name"](#name).
 
 ## services
 
     my $pgservice = Pg::ServiceFile->new();
-    for my $service ($pgservice->services) {
-        say "$service->{dbname} at $service->{host}";
+    while (my ($name, $service) = each %{$pgservice->services}) {
+        say "[$name] $service->{dbname} at $service->{host}";
     }
 
 Returns a `HASH` of all of the connection services from ["file"](#file).
+
+# CREDITS
+
+> Erik Rijkers
 
 # AUTHOR
 
@@ -106,4 +117,5 @@ it under the same terms as Perl itself.
 
 # SEE ALSO
 
+[Config::Pg::ServiceFile](https://metacpan.org/pod/Config::Pg::ServiceFile),
 [https://www.postgresql.org/docs/current/static/libpq-pgservice.html](https://www.postgresql.org/docs/current/static/libpq-pgservice.html).

@@ -1,7 +1,7 @@
 package Pg::ServiceFile;
 
 use Moo;
-use Config::INI::Reader;
+use Config::Pg::ServiceFile;
 use Types::Standard qw/ArrayRef HashRef Str/;
 use Types::Path::Tiny 'Path';
 
@@ -42,9 +42,9 @@ has services => (
 
 sub _build_data { shift->file->slurp_utf8 }
 
-sub _build_file { $ENV{PGSERVICEFILE} // '~/.pg_service.conf'}
+sub _build_file { $ENV{PGSERVICEFILE} || '~/.pg_service.conf'}
 
-sub _build_name { $ENV{PGSERVICE} // '' }
+sub _build_name { $ENV{PGSERVICE} || '' }
 
 sub _build_names { [sort keys %{shift->services}] }
 
@@ -53,7 +53,7 @@ sub _build_service {
     return $self->services->{$self->name};
 }
 
-sub _build_services { Config::INI::Reader->read_string(shift->data) }
+sub _build_services { Config::Pg::ServiceFile->read_string(shift->data) }
 
 1;
 
@@ -88,6 +88,10 @@ connection service file. It's complete in the fact that it reads the C<<
 $ENV{PGSERVICEFILE} >> or user service file as standard, but will not
 automatically retrieve and merge the system-wide service file or check
 C<PGSYSCONFDIR>.
+
+If you know the connection service file you want to use, and just want the data
+as a C<HASH> reference, you can use the simpler module L<Config::Pg::ServiceFile>
+which has less dependencies and features.
 
 =head1 ATTRIBUTES
 
@@ -158,6 +162,14 @@ the corresponding connection service. See L</"name">.
 
 Returns a C<HASH> of all of the connection services from L</"file">.
 
+=head1 CREDITS
+
+=over 2
+
+Erik Rijkers
+
+=back
+
 =head1 AUTHOR
 
 Paul Williams E<lt>kwakwa@cpan.orgE<gt>
@@ -173,6 +185,7 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
+L<Config::Pg::ServiceFile>,
 L<https://www.postgresql.org/docs/current/static/libpq-pgservice.html>.
 
 =cut
