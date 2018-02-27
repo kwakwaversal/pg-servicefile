@@ -7,7 +7,7 @@ use Types::Path::Tiny 'Path';
 
 # ABSTRACT: Basic PostgreSQL connection service file interface
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 has data => (
     is  => 'lazy',

@@ -1,6 +1,8 @@
 Revision history for Pg::ServiceFile
 
 {{$NEXT}}
+
+0.03  2018-02-27 20:33:58 UTC
     - Set minimum requirement for Moo as the `coerce => 1` attribute was not
       supported until v1.006000.
 
