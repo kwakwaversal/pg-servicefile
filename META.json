@@ -38,7 +38,7 @@
       "runtime" : {
          "requires" : {
             "Config::Pg::ServiceFile" : "0",
-            "Moo" : "0",
+            "Moo" : "1.006000",
             "Types::Path::Tiny" : "0",
             "Types::Standard" : "0",
             "perl" : "5.008005"

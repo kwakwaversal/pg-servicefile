@@ -21,13 +21,13 @@ Pg::ServiceFile - Basic PostgreSQL connection service file interface
 # DESCRIPTION
 
 [Pg::ServiceFile](https://metacpan.org/pod/Pg::ServiceFile) is a partially complete interface to the PostgreSQL
-connection service file. It's complete in the fact that it reads the `$ENV{PGSERVICEFILE}` or user service file as standard, but will not
-automatically retrieve and merge the system-wide service file or check
-`PGSYSCONFDIR`.
+connection service file. It's complete in the fact that it reads the `$ENV{PGSERVICEFILE}` or the user service file `~/.pg_service.conf` as
+standard, but will not automatically retrieve and merge the system-wide service
+file or check `PGSYSCONFDIR`.
 
 If you know the connection service file you want to use, and just want the data
-as a `HASH` reference, you can use the simpler module [Config::Pg::ServiceFile](https://metacpan.org/pod/Config::Pg::ServiceFile)
-which has less dependencies and features.
+as a `HASH` reference, you can use the simpler module
+[Config::Pg::ServiceFile](https://metacpan.org/pod/Config::Pg::ServiceFile) which has less dependencies and features.
 
 # ATTRIBUTES
 

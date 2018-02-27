@@ -1,6 +1,8 @@
 Revision history for Pg::ServiceFile
 
 {{$NEXT}}
+    - Set minimum requirement for Moo as the `coerce => 1` attribute was not
+      supported until v1.006000.
 
 0.02  2018-02-25 23:33:54 UTC
     - Account for comment character in connection files (thanks Erik Rijkers!)
