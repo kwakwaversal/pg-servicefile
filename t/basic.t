@@ -17,6 +17,8 @@ subtest pgservice_env     => \&test_pgservice_env;
 subtest pgservicefile_env => \&test_pgservicefile_env;
 subtest services          => \&test_services;
 
+done_testing;
+
 sub test_basic {
     ok dies {
         my $pgservice = Pg::ServiceFile->new(
@@ -71,8 +73,6 @@ sub test_services {
     my $foo = $pgservice->services->{foo};
     is $foo->{user} => 'foo';
 }
-
-done_testing;
 
 __DATA__
 

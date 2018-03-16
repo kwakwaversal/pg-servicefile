@@ -10,50 +10,44 @@ use Types::Path::Tiny 'Path';
 our $VERSION = '0.03';
 
 has data => (
-    is  => 'lazy',
-    isa => Str,
+    is      => 'lazy',
+    isa     => Str,
+    builder => sub { shift->file->slurp_utf8 }
 );
 
 has file => (
-    is     => 'lazy',
-    isa    => Path,
-    coerce => 1,
+    is      => 'lazy',
+    isa     => Path,
+    coerce  => 1,
+    builder => sub { $ENV{PGSERVICEFILE} || '~/.pg_service.conf' }
 );
 
 has name => (
-    is  => 'lazy',
-    isa => Str,
+    is      => 'lazy',
+    isa     => Str,
+    builder => sub { $ENV{PGSERVICE} || '' }
 );
 
 has names => (
-    is  => 'lazy',
-    isa => ArrayRef,
+    is      => 'lazy',
+    isa     => ArrayRef,
+    builder => sub { [sort keys %{shift->services}] }
 );
 
 has service => (
-    is  => 'lazy',
-    isa => HashRef,
+    is      => 'lazy',
+    isa     => HashRef,
+    builder => sub {
+        my $self = shift;
+        return $self->services->{$self->name};
+    }
 );
 
 has services => (
-    is  => 'lazy',
-    isa => HashRef,
+    is      => 'lazy',
+    isa     => HashRef,
+    builder => sub { Config::Pg::ServiceFile->read_string(shift->data) }
 );
-
-sub _build_data { shift->file->slurp_utf8 }
-
-sub _build_file { $ENV{PGSERVICEFILE} || '~/.pg_service.conf'}
-
-sub _build_name { $ENV{PGSERVICE} || '' }
-
-sub _build_names { [sort keys %{shift->services}] }
-
-sub _build_service {
-    my $self = shift;
-    return $self->services->{$self->name};
-}
-
-sub _build_services { Config::Pg::ServiceFile->read_string(shift->data) }
 
 1;
 
